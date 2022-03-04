@@ -2,13 +2,12 @@ package com.fjz.todolist.ui
 
 import android.app.Activity
 import android.os.Bundle
-import android.os.PersistableBundle
 import androidx.appcompat.app.AppCompatActivity
 import com.fjz.todolist.databinding.ActivityAddTaskBinding
 import com.fjz.todolist.datasource.TaskDataSource
-import com.fjz.todolist.datasource.model.Task
 import com.fjz.todolist.extensions.format
 import com.fjz.todolist.extensions.text
+import com.fjz.todolist.model.Task
 import com.google.android.material.datepicker.MaterialDatePicker
 import com.google.android.material.timepicker.MaterialTimePicker
 import com.google.android.material.timepicker.TimeFormat
@@ -16,14 +15,14 @@ import java.util.*
 
 class AddTaskActivity: AppCompatActivity() {
     private lateinit var binding:ActivityAddTaskBinding
-    override fun onCreate(savedInstanceState: Bundle?, persistentState: PersistableBundle?) {
-        super.onCreate(savedInstanceState, persistentState)
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
         binding = ActivityAddTaskBinding.inflate(layoutInflater)
         setContentView(binding.root)
         if (intent.hasExtra(TASK_ID)){
-            val taskid = intent.getIntExtra(TASK_ID, 0)
-            TaskDataSource.findById(taskid)?.let {
-                binding.itilTitle.text = it.title
+            val taskId = intent.getIntExtra(TASK_ID, 0)
+            TaskDataSource.findById(taskId)?.let {
+                binding.tilTitle.text = it.title
                 binding.tilDate.text = it.date
                 binding.tilHour.text = it.hour
             }
@@ -58,7 +57,7 @@ class AddTaskActivity: AppCompatActivity() {
         }
         binding.btnNewTask.setOnClickListener{
             val task = Task(
-                title =binding.itilTitle.text,
+                title =binding.tilTitle.text,
                 date=binding.tilDate.text,
                 hour = binding.tilHour.text,
                 id = intent.getIntExtra(TASK_ID,0)

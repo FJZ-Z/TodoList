@@ -1,6 +1,6 @@
 package com.fjz.todolist.datasource
 
-import com.fjz.todolist.datasource.model.Task
+import com.fjz.todolist.model.Task
 
 object TaskDataSource{
     private val list = arrayListOf<Task>()
@@ -13,10 +13,9 @@ object TaskDataSource{
             list.remove(task)
             list.add(task)
         }
-
     }
 
-    fun findById(taskid: Int) = list.find{it.id ==taskid}
+    fun findById(taskId: Int) = list.find{it.id ==taskId}
     fun deleteTask(task: Task) {
         list.remove(task)
     }

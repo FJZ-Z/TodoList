@@ -1,4 +1,4 @@
-package com.fjz.todolist.datasource.model
+package com.fjz.todolist.model
 
 data class Task(
     val title:String,

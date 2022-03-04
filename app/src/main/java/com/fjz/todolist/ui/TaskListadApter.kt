@@ -1,5 +1,6 @@
 package com.fjz.todolist.ui
 
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.PopupMenu
@@ -8,7 +9,7 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.fjz.todolist.R
 import com.fjz.todolist.databinding.ItemTaskBinding
-import com.fjz.todolist.datasource.model.Task
+import com.fjz.todolist.model.Task
 
 class TaskListAdapter: ListAdapter<Task, TaskListAdapter.TaskViewHolder>(DiffCallback()){
     var listenerEdit:(Task) -> Unit ={}
@@ -22,9 +23,10 @@ class TaskListAdapter: ListAdapter<Task, TaskListAdapter.TaskViewHolder>(DiffCal
         holder.bind(getItem(position))
     }
     inner class TaskViewHolder(private val binding:ItemTaskBinding):RecyclerView.ViewHolder(binding.root){
+        @SuppressLint("SetTextI18n")
         fun bind(item: Task) {
             binding.tvTittle.text = item.title
-            binding.tvDate.text = "${item.date}:${item.hour}"
+            binding.tvDate.text = "${item.date} ${item.hour}"
             binding.ivMore.setOnClickListener {
                 showPopup(item)
             }
